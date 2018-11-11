@@ -1,0 +1,358 @@
+Options:
+    maincolor
+# Above is the main color ^^
+    prefix:
+    #theses are the prices per item (below)
+    cobblestone:
+    coal:
+    coalblock:
+    ironingot
+    ironblock:
+    goldingot:
+    goldblock:
+    redstone:
+    redstoneblock:
+    lapis:
+    lapisblock:
+    diamond:
+    diamondblock:
+    emerald:
+    emeraldblock:
+    sugarcane:
+    cactus:
+    melonslices:
+    pumpkin:
+    potato:
+    carrot:
+    netherwart:
+    cocoabean:
+    blazerod:
+    rotenflesh:
+    bone:
+    arrow:
+    string:
+ 
+ 
+command /sell [<text>]:
+ 
+    trigger:
+        if arg 1 is not set:
+            send "&r"
+            send "{@prefix} &8» &7/Sell &7<Hand/List>"
+            send "&r"
+        if arg 1 is "hand":
+            if player is holding cobble_stone:
+                set {_cobble} to amount of cobble_stone in player's inventory
+                set {_cobblevalue} to {cobblestone} * {_cobble}
+                set {_money} to {_coalvalue} + {_cobblevalue}
+                remove all cobble_stone from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_cobble}% &7Cobble_Stone &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding coal:
+                set {_coal} to amount of coal in player's inventory
+                set {_coalvalue} to {coal} * {_coal}
+                set {_money} to {_coalvalue} + {_coal}
+                remove all coal from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_coal}% &7Coal &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding coal_block:
+                set {_coalb} to amount of coal_block in player's inventory
+                set {_coalbvalue} to {coalblock} * {_coalb}
+                set {_money} to {_coalbvalue} + {_coalb}
+                remove all coal_block from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_coalb}% &7Coal_Blocks &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding iron_ingot:
+                set {_iron} to amount of iron_ingot in player's inventory
+                set {_ironvalue} to {ironingot} * {_iron}
+                set {_money} to {_ironvalue} + {_iron}
+                remove all iron_ingot from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_iron}% &7Iron_ingots &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding iron_block:
+                set {_ironb} to amount of iron_block in player's inventory
+                set {_ironbvalue} to {ironblock} * {_ironb}
+                set {_money} to {_ironbvalue} + {_ironb}
+                remove all iron_block from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_ironb}% &7Iron_Blocks &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding gold_ingot:
+                set {_gold} to amount of gold_ingot in player's inventory
+                set {_goldvalue} to {goldingot} * {_gold}
+                set {_money} to {_goldvalue} + {_gold}
+                remove all gold_ingot from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_gold}% &7Gold_ingots &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding gold_block:
+                set {_goldb} to amount of gold_block in player's inventory
+                set {_goldbvalue} to {goldblock} * {_goldb}
+                set {_money} to {_goldbvalue} + {_goldb}
+                remove all gold_block from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_goldb}% &7Gold_Blocks &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding redstone:
+                set {_rstone} to amount of redstone in player's inventory
+                set {_rstonevalue} to {redstone} * {_rstone}
+                set {_money} to {_rstonevalue} + {_rstone}
+                remove all redstone from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_rstone}% &7Redstone &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding redstone_block:
+                set {_rstoneb} to amount of redstone_block in player's inventory
+                set {_rstonebvalue} to {redstoneblock} * {_rstoneb}
+                set {_money} to {_rstonebvalue} + {_rstoneb}
+                remove all redstone_block from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_rstoneb}% &7Redstone_Blocks &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding lapis:
+                set {_lapis} to amount of lapis in player's inventory
+                set {_lapisvalue} to {lapis} * {_lapis}
+                set {_money} to {_lapisvalue} + {_lapis}
+                remove all lapis from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_lapis}% &7Lapis &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding lapis_block:
+                set {_lapisb} to amount of lapis_block in player's inventory
+                set {_lapisbvalue} to {lapisblock} * {_lapisb}
+                set {_money} to {_lapisbvalue} + {_lapisb}
+                remove all lapis_block from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_lapisb}% &7Lapis_Blocks &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding diamond:
+                set {_diamond} to amount of diamond in player's inventory
+                set {_diamondvalue} to {diamond} * {_diamond}
+                set {_money} to {_diamondvalue} + {_diamond}
+                remove all diamond from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_diamond}% &7Diamonds &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding diamond_block:
+                set {_diamondb} to amount of diamond_block in player's inventory
+                set {_diamondbvalue} to {diamondblock} * {_diamondb}
+                set {_money} to {_diamondbvalue} + {_diamondb}
+                remove all diamond_block from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_diamondb}% &7Diamond_Blocks &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding emerald:
+                set {_emerald} to amount of emerald in player's inventory
+                set {_emeraldvalue} to {emerald} * {_emerald}
+                set {_money} to {_emeraldvalue} + {_emerald}
+                remove all emerald from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_emerald}% &7Emeralds &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding emerald_block:
+                set {_emeraldb} to amount of emerald_block in player's inventory
+                set {_emeraldbvalue} to {emeraldblock} * {_emeraldb}
+                set {_money} to {_emeraldbvalue} + {_emeraldb}
+                remove all emerald_block from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_emeraldb}% &7Emerald_Blocks &7for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding sugar_cane:
+                set {_scane} to amount of sugar_cane in player's inventory
+                set {_scanevalue} to {sugarcane} * {_scane}
+                set {_money} to {_scanevalue} + {_scane}
+                remove all sugar_cane from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_scane}% &7Sugar_Cane for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding cactus:
+                set {_cactus} to amount of cactus in player's inventory
+                set {_cactusvalue} to {cactus} * {_cactus}
+                set {_money} to {_cactusvalue} + {_cactus}
+                remove all cactus from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_cactus}% &7Cactus for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding melon_slice:
+                set {_melon} to amount of melon_slice in player's inventory
+                set {_melonvalue} to {melonslices} * {_melon}
+                set {_money} to {_melonvalue} + {_melon}
+                remove all melon_slice from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_melon}% &7Melon_slices for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding pumpkin:
+                set {_pumpkin} to amount of pumpkin in player's inventory
+                set {_pumpkinvalue} to {pumpkin} * {_pumpkin}
+                set {_money} to {_pumpkinvalue} + {_pumpkin}
+                remove all pumpkin from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_pumpkin}% &7Pumpkins for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding potato_item:
+                set {_pplant} to amount of potato_item in player's inventory
+                set {_pplantvalue} to {potato} * {_pplant}
+                set {_money} to {_pplantvalue} + {_pplant}
+                remove all potato_item from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_pplant}% &7Potatos for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding carrot:
+                set {_cplant} to amount of carrot in player's inventory
+                set {_cplantvalue} to {carrot} * {_cplant}
+                set {_money} to {_cplantvalue} + {_cplant}
+                remove all carrot from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_cplant}% &7Carrots for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding nether_wart:
+                set {_nplant} to amount of nether_wart in player's inventory
+                set {_nplantvalue} to {netherwart} * {_nplant}
+                set {_money} to {_nplantvalue} + {_nplant}
+                remove all nether_wart from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_nplant}% &7Nether_warts for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding cocoa_beans:
+                set {_cplant} to amount of cocoa_beans in player's inventory
+                set {_cplantvalue} to {cocoabean} * {_cplant}
+                set {_money} to {_cplantvalue} + {_cplant}
+                remove all cocoa_beans from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_cplant}% &7Cocoa_beans for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding blaze_rod:
+                set {_brod} to amount of blaze_rod in player's inventory
+                set {_brodvalue} to {blazerod} * {_brod}
+                set {_money} to {_brodvalue} + {_brod}
+                remove all blaze_rod from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_brod}% &7Blaze_Rods for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding rotten_flesh:
+                set {_rflesh} to amount of rotten_flesh in player's inventory
+                set {_rfleshvalue} to {rottenflesh} * {_rflesh}
+                set {_money} to {_rfleshvalue} + {_rflesh}
+                remove all rotten_flesh from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_rflesh}% &7Rotten_Flesh for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding bone:
+                set {_bone} to amount of bone in player's inventory
+                set {_bonevalue} to {bone} * {_bone}
+                set {_money} to {_bonevalue} + {_bone}
+                remove all bone from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_bone}% &7Bones for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding arrow:
+                set {_arrow} to amount of arrow in player's inventory
+                set {_arrowvalue} to {arrow} * {_arrow}
+                set {_money} to {_arrowvalue} + {_arrow}
+                remove all arrow from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_arrow}% &7Arrows for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding string:
+                set {_string} to amount of string in player's inventory
+                set {_stringvalue} to {string} * {_string}
+                set {_money} to {_stringvalue} + {_string}
+                remove all string from player's inventory
+                add {_money} to player's balance
+                send "&r"
+                send "&7You sold &b%{_string}% &7String for &a$%{_money}%"
+                send "&r"
+                stop
+            else if player is holding air:
+                send "&r"
+                send "&4&lERROR &7Are you really trying to sell air...."
+                send "&r"
+        if arg 1 is "list":
+                send "{prefix} {maincolor}&lSellable Items"
+                send "    {maincolor} These are the sellable items
+                send "&7» Cobblestone ‣ {cobblestone}"
+                send "&7» Coal ‣ {coal}"
+                send "&7» Coal Blocks ‣ {coalblock}"
+                send "&7» Iron Ingots ‣ {ironingot}"
+                send "&7» Iron Blocks ‣ {ironblock}"
+                send "&7» Gold Ingots ‣ {goldingot}"
+                send "&7» Gold Blocks ‣ {goldblock}"
+                send "&7» Redstone Dust ‣ {redstone}"
+                send "&7» Redstone Blocks ‣ {redstoneblock}"
+                send "&7» Lapis ‣ {lapis}"
+                send "&7» Lapis Blocks ‣ {lapisblock}"
+                send "&7» Diamond ‣ {diamond}
+                send "&7» Diamond Blocks ‣ {diamondblock}"
+                send "&7» Emerald ‣ {emerald}"
+                send "&7» Emerald Blocks ‣ {emeraldblock}"
+                send "&7» Sugar Cane ‣ {sugarcane}"
+                send "&7» Cactus ‣ {cactus}"
+                send "&7» Melon Slices ‣ {melonslices}"
+                send "&7» Pumpkins ‣ {pumpkin}"
+                send "&7» Potato ‣ {potato"
+                send "&7» Carrot ‣ {carrot}"
+                send "&7» Nether Wart ‣ {netherwart}"
+                send "&7» Cocoa Beans ‣ {cocoabean}"
+                send "&7» Blaze Rod ‣ {blazerod}"
+                send "&7» Rotten Flesh ‣ {rottenflesh}
+                send "&7» Bone ‣ {bone}"
+                send "&7» Arrow ‣ {arrow}"
+                send "&7» String ‣ {string}
