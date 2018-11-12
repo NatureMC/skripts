@@ -1,0 +1,334 @@
+# ///-------------------------------------///
+# /// FRIENDS SKRIPT - BY 3asel OmniBuilds (edited by pdxryanpdx)///
+# ///-------------------------------------///
+
+options:
+	permission: friends.use                                            
+	pmessage: &cYou do not have access to this command.            
+	log: false                                                          
+	max: 30                                                              
+	maxmessage: &cYou can only have 30 friends.                          
+	
+	chatformat: &b&lFriendChat &b(from %player%) &7%message%                    
+	chaton: &b&lNATUREMC &7» You have &aenabled&7 friends chat.                         
+	chatoff: &b&lNATUREMC &7»You have &c&ndisabled&a friends chat.                 
+	
+	requestsent: &b&lNATUREMC &7»You have already sent &c%arg-2% &7a request.             
+	friendsoff: &b&lNATUREMC &7»&c%arg-2% &7has friend requests turned off.               	
+	requestself: &b&lNATUREMC &7»You cannot friend yourself.                         
+	alreadyfriends: &b&lNATUREMC &7»This player is already a friend.                  
+	notfriendsme: &b&lNATUREMC &7»You are not friends with yourself.                   
+	notfriends: &b&lNATUREMC &7»They are not a friend.                                 
+	acceptme: &aYou have accepted %arg-2%'s friend request.              
+	acceptarg: &b&lNATUREMC &7»%player% has &aaccepted &7your friend request.          
+	sentme: &b&lNATUREMC &7»You have sent a request to be friends with &a%arg-2%&7.     
+	sentarg: &b&lNATUREMC &7»&a%player% &7has sent you a friend request.               
+	offline: &b&lNATUREMC &7»This player is offline.                                 
+	removedme: &b&lNATUREMC &7»You are no longer friends with %arg-2%.           
+	removedarg: &b&lNATUREMC &7»&a%player% &7has removed you as a friend.                 
+	toggleoff: &b&lNATUREMC &7»You have turned &coff &7friend requests.              
+	toggleon: &b&lNATUREMC &7»You have turned &aon &7friend requests.                     
+	
+	blockadd: &&b&lNATUREMC &7»You have blocked &c%arg-2%'s &7requests.                     
+	blockremove: &b&lNATUREMC &7» You have unblocked &a%arg-2%'s &7requests.               
+	youreblocked: &b&lNATUREMC &7»You cannot send this player a friend request.      
+	cantblock: &b&lNATUREMC &7»You cannot block friends.                              
+	blockme: &b&lNATUREMC &7»You cannot block yourself.                                
+	offlineblock: &b&lNATUREMC &7» Cannot block offline players.                      
+	
+	friendswith: &b&lNATUREMC &7»You are friends with...             
+	friendswitharg: &a%arg-2% is friends with...                        
+	nofriends: &b&lNATUREMC &7»You do not have any friends.                           
+	nofriendsarg:&b&lNATUREMC &7»c%arg-2% has no friends.                              
+	maxcolour: &b                                                       
+	listcolour: &7                                                       
+	
+	attack: &b&lNATUREMC &7»You cannot attack your friends.                            
+
+# Only chance this if you need to - this is layed out to be simple to
+# understand. This section is for the log config.
+
+	logaddme: ADD :: %player% added %arg-2% as a friend" in "friends                     
+	logaddarg: ADD :: %arg-2% was added to %player%'s friends list" in "friends            
+	logremoveme: REMOVE :: %player% removed %arg-2% as a friend" in "friends               
+	logremovearg: REMOVE :: %arg-2% was removed from %player%'s friends list" in "friends 
+
+# ///-------------------------------------------------------///
+# /// DON'T EDIT THIS IF YOU DON'T KNOW WHAT YOUR DOING !!! ///
+# ///-------------------------------------------------------///
+
+command /friends [<text>] [<offline player>]:
+	permission: {@permission}
+	permission message: {@pmessage}
+	aliases: friend, f
+	trigger:
+		if arg-1 is "add":
+			if {%player's uuid%.fr} is {@max}:
+				send "{@maxmessage}"
+				stop
+			if {resent.request.%arg-2%} is player:
+				send "{@requestsent}"
+				stop
+			if {friends.toggle.%arg-2's uuid%} is true:
+				send "{@friendsoff}"
+				stop
+			if {%arg-2's uuid%.frb::*} contains player:
+				send "{@youreblocked}"
+				stop
+			if arg-2 is set:
+				if arg-2 is player:
+					send "{@requestself}"
+					stop
+				if arg-2 is online:
+					if {%player's uuid%.frl::*} contains arg-2:
+						send "{@alreadyfriends}"
+						stop
+					if {%player's uuid%.fr::*} contains arg-2's uuid:
+						send "{@alreadyfriends}"
+						stop
+					else:
+						if {resent.request.%player%} is "%arg-2%":
+							add player to {%arg-2's uuid%.frl::*}
+							add arg-2 to {%player's uuid%.frl::*}
+							add player's uuid to {%arg-2's uuid%.fr::*}
+							add arg-2's uuid to {%player's uuid%.fr::*}
+							send "{@acceptme}"
+							send "{@acceptarg}" to arg-2
+							delete {resent.request.%player%}
+							delete {resent.request.%arg-2%}
+							add 1 to {%player's uuid%.fr}
+							add 1 to {%arg-2's uuid%.fr}
+							if "{@log}" contains "true":
+								log "{@logaddme}"
+								log "{@logaddarg}"
+							stop
+						set {resent.request.%arg-2%} to player
+						send "{@sentme}"
+						send "{@sentarg}" to arg-2
+						stop
+				if arg-2 is offline:
+					if {%player's uuid%.frl::*} contains arg-2:
+						send "{@alreadyfriends}"
+						stop
+					if {%player's uuid%.fr::*} contains arg-2's uuid:
+						send "{@alreadyfriends}"
+						stop
+					else:
+						if {resent.request.%player%} is "%arg-2%":
+							add player to {%arg-2's uuid%.frl::*}
+							add arg-2 to {%player's uuid%.frl::*}
+							add player's uuid to {%arg-2's uuid%.fr::*}
+							add arg-2's uuid to {%player's uuid%.fr::*}
+							send "{@acceptme}"
+							send "{@acceptarg}" to arg-2
+							delete {resent.request.%player%}
+							delete {resent.request.%arg-2%}
+							add 1 to {%player's uuid%.fr}
+							add 1 to {%arg-2's uuid%.fr}
+							if "{@log}" contains "true":
+								log "{@logaddme}"
+								log "{@logaddarg}"
+							stop
+						send "{@offline}"
+						stop
+			else:
+				if "{@block}" contains "true":
+					if "{@toggle}" contains "true":
+						send "&c/friends <add/remove/list/chat/toggle/block> <player>"
+						stop
+					send "&c/friends <add/remove/list/chat/block> <player>"
+					stop
+				if "{@toggle}" contains "true":
+					send "&c/friends <add/remove/list/chat/block> <player>"
+					stop
+				send "&c/friends <add/remove/list/chat> <player>"
+				stop
+		if arg-1 is "remove":
+			if arg-2 is set:
+				if arg-2 is online:
+					if arg-2 is player:
+						send "{@notfriendsme}"
+						stop
+					if {%player's uuid%.frl::*} contains "%arg-2%":
+						remove player from {%arg-2's uuid%.frl::*}
+						remove arg-2 from {%player's uuid%.frl::*}
+						remove player's uuid from {%arg-2's uuid%.fr::*}
+						remove arg-2's uuid from {%player's uuid%.fr::*}
+						remove 1 from {%player's uuid%.fr}
+						remove 1 from {%arg-2's uuid%.fr}
+						send "{@removedme}"
+						send "{@removedarg}" to arg-2
+						if "{@log}" contains "true":
+							log "{@logremoveme}"
+							log "{@logremovearg"
+						stop
+					else:
+						send "{@notfriends}"
+						stop
+				if arg-2 is offline:
+					if arg-2 is player:
+						send "{@notfriendsme}"
+						stop
+					if {%player's uuid%.frl::*} contains "%arg-2%":
+						remove player from {%arg-2's uuid%.frl::*}
+						remove arg-2 from {%player's uuid%.frl::*}
+						remove player's uuid from {%arg-2's uuid%.fr::*}
+						remove arg-2's uuid from {%player's uuid%.fr::*}
+						remove 1 from {%player's uuid%.fr}
+						remove 1 from {%arg-2's uuid%.fr}
+						send "{@removedme}"
+						send "{@removedarg}" to arg-2
+						if "{@log}" contains "true":
+							log "{@logremoveme}"
+							log "{@logremovearg"
+						stop
+					else:
+						send "{@notfriends}"
+						stop
+			else:
+				if "{@block}" contains "true":
+					if "{@toggle}" contains "true":
+						send "&c/friends <add/remove/list/chat/toggle/block> <player>"
+						stop
+					send "&c/friends <add/remove/list/chat/block> <player>"
+					stop
+				if "{@toggle}" contains "true":
+					send "&c/friends <add/remove/list/chat/block> <player>"
+					stop
+				send "&c/friends <add/remove/list/chat> <player>"
+				stop
+		if arg-1 is "block":
+			if "{@block}" contains "true":
+				if player has permission "{@blockperm}":
+					if {%player's uuid%.frl::*} contains arg-2:
+						send "{@cantblock}"
+						stop
+					if arg-2 is player:
+						send "{@blockme}"
+						stop
+					if arg-2 is online:
+						if {%player's uuid%.frb::*} contains arg-2:
+							remove arg-2 from {%player's uuid%.frb::*}
+							send "{@blockremove}"
+							stop
+						else:
+							add arg-2 to {%player's uuid%.frb::*}
+							send "{@blockadd}"
+							stop
+					if arg-2 is offline:
+						if {%player's uuid%.frb::*} contains arg-2:
+							remove arg-2 from {%player's uuid%.frb::*}
+							send "{@blockremove}"
+							stop
+						else:
+							add arg-2 to {%player's uuid%.frb::*}
+							send "{@blockadd}"
+							stop
+				else:
+					send "{@pmessage}"
+					stop
+			else:
+				if "{@block}" contains "true":
+					if "{@toggle}" contains "true":
+						send "&c/friends <add/remove/list/chat/toggle/block> <player>"
+						stop
+					send "&c/friends <add/remove/list/chat/block> <player>"
+					stop
+				if "{@toggle}" contains "true":
+					send "&c/friends <add/remove/list/chat/block> <player>"
+					stop
+				send "&c/friends <add/remove/list/chat> <player>"
+				stop
+		if arg-1 is "toggle":
+			if "{@toggle}" contains "true":
+				if player has permission "{@toggleperm}":
+					if {friends.toggle.%player's uuid%} is not set:
+						set {friends.toggle.%player's uuid%} to false
+					if {friends.toggle.%player's uuid%} is false:
+						set {friends.toggle.%player's uuid%} to true
+						send "{@toggleoff}"
+						stop
+					if {friends.toggle.%player's uuid%} is true:
+						set {friends.toggle.%player's uuid%} to false
+						send "{@toggleon}"
+						stop
+				else:
+					send "{@pmessage}"
+					stop
+			else:
+				if "{@block}" contains "true":
+					if "{@toggle}" contains "true":
+						send "&c/friends <add/remove/list/chat/toggle/block> <player>"
+						stop
+					send "&c/friends <add/remove/list/chat/block> <player>"
+					stop
+				if "{@toggle}" contains "true":
+					send "&c/friends <add/remove/list/chat/block> <player>"
+					stop
+				send "&c/friends <add/remove/list/chat> <player>"
+				stop
+		if arg-1 is "list":
+			if arg-2 is set:
+				if arg-2 is online:
+					if {%arg-2's uuid%.frl::*} is set:
+						send ""
+						send "{@friendswitharg} {@maxcolour}(%{%arg-2's uuid%.fr}%/{@max}) {@listcolour}%{%arg-2's uuid%.frl::*}%"
+						send ""
+						stop
+					send "{@nofriendsarg}"
+					stop
+				if arg-2 is offline:
+					if {%arg-2's uuid%.frl::*} is set:
+						send ""
+						send "{@friendswitharg} {@maxcolour}(%{%arg-2's uuid%.fr}%/{@max}) {@listcolour}%{%arg-2's uuid%.frl::*}%"
+						send ""
+						stop
+					send "{@nofriendsarg}"
+					stop
+			else:
+				if {%player's uuid%.frl::*} is set:
+					send ""
+					send "{@friendswith} {@maxcolour}(%{%player's uuid%.fr}%/{@max}) {@listcolour}%{%player's uuid%.frl::*}%"
+					send ""
+					stop
+				send "{@nofriends}"
+				stop
+			send "{@nofriends}"
+			stop
+		if arg-1 is "chat":
+			if {%player's uuid%.fr} is greater than or equal to 1:
+				if {fc.%player%} is not set:
+					set {fc.%player%} to true
+					send "{@chaton}"
+					stop
+				delete {fc.%player%}
+				send "{@chatoff}"
+				stop
+			send "{@nofriends}"
+			stop
+		else:
+			if "{@block}" contains "true":
+				if "{@toggle}" contains "true":
+					send "&c/friends <add/remove/list/chat/toggle/block> <player>"
+					stop
+				send "&c/friends <add/remove/list/chat/block> <player>"
+				stop
+			if "{@toggle}" contains "true":
+				send "&c/friends <add/remove/list/chat/block> <player>"
+				stop
+			send "&c/friends <add/remove/list/chat> <player>"
+			stop
+			
+on chat:
+	if {fc.%player%} is true:
+		cancel event
+		loop all players:
+			if {%player's uuid%.frl::*} contains loop-player:
+				send "{@chatformat}" to loop-player
+				send "{@chatformat}" to player
+
+on damage:
+	if {%attacker's uuid%.frl::*} contains victim:
+		cancel event
+		extinguish the victim
+		send "{@attack}" to attacker
