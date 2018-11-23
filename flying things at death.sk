@@ -1,0 +1,8 @@
+on death:
+    if victim is player: 
+        spawn a armor stand at block 1 above victim
+        push the last spawned armor stand upwards at speed 5
+        
+        on death:
+    if victim is player: 
+        shoot firework from player
